@@ -11,6 +11,7 @@ import citation from '../assets/icons/citation.png'
 import AreaChartCard from '../components/AreaChartCard';
 
 export default function Geo() {
+  const {user} = useAuth()
   const { seo, geo } = useServices();
   const [loading, setLoading] = useState(true);
   const [aiReferenceData, setAiReferencedData] = useState(null);
@@ -18,6 +19,7 @@ export default function Geo() {
   const [rankingDistribtuion, setRankingDistribtuion] = useState()
   const [geoPerformanceTrend, setGeoPerformanceTrend] = useState([])
   const [pageVisibilityShare, setpageVisibilityShare] = useState([])
+  const [seoMetricsFromDb, setSeoMetricsFromDb] = useState([])
 
   useEffect(() => {
     let mounted = true;
@@ -29,12 +31,14 @@ export default function Geo() {
         const rankingDistribtuionData = await geo.getRankingDistribution()
         const performanceTrendData = await geo.getPerformanceTrend()
         const pageVisibilityShareData = await geo.getVisibilityShare()
+        const seoMetricsFromDbData = await seo.getSeoMetricsFromDb(user.id)
         if (mounted){
           setAiReferencedData(aiReferenceData);
           setGeoKpis(geoKpisData)
           setRankingDistribtuion(rankingDistribtuionData)
           setGeoPerformanceTrend(performanceTrendData)
           setpageVisibilityShare(pageVisibilityShareData)
+          setSeoMetricsFromDb(seoMetricsFromDbData)
         } 
       } finally {
         if (mounted) setLoading(false);
@@ -49,7 +53,7 @@ export default function Geo() {
       <div className="flex flex-col lg:flex-row  gap-6 justify-around text-text-secondary w-full">
             <SingleCard tittle={"AI Overview Coverage Keywords"} value={geoKpis && geoKpis?.aiOverviewCoverage?.totalKeywords} loading={loading} img={ai}/>
             <SingleCard tittle={"AI Reference Visitors"} value={aiReferenceData && Object.values(aiReferenceData).reduce((sum, acc) => sum + acc) || 0} loading={loading} img={aiRef}/>
-            <SingleCard tittle={"AI Citation Readiness"} value={geoKpis && geoKpis?.aiCitationReadiness?.aiOverviewKeywords} loading={loading} img={citation}/>
+            <SingleCard tittle={"AI Citation Readiness"} value={seoMetricsFromDb?.aICitationReadiness} loading={loading} img={citation}/>
             <SingleCard tittle={"GEO Visibility Share"} value={`${pageVisibilityShare.page1Share} %`} loading={loading} img={share}/>
         </div>
           <AreaChartCard titleValue="Performance Trend" titleLabel='GEO Performance daily' data={geoPerformanceTrend}/>
