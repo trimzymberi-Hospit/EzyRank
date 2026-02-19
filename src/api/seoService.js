@@ -34,6 +34,10 @@ export function createSeoService(api) {
           includeDateRange: false
         });
       },
+
+      getNewVsLostBacklinks() {
+        return api.request("/semrush/backlinks/new-lost");
+      },
     };
   }
   

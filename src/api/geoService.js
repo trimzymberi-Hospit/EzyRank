@@ -1,6 +1,6 @@
 export function createGeoService(api) {
     return {
-        getAiRefernceVisitors() {
+        getAiReferenceVisitors() {
             return api.request("/google-analytics/users-from-ai");
         },
 

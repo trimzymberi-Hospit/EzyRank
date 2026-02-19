@@ -19,14 +19,14 @@ export default function Geo() {
   const [rankingDistribtuion, setRankingDistribtuion] = useState()
   const [geoPerformanceTrend, setGeoPerformanceTrend] = useState([])
   const [pageVisibilityShare, setpageVisibilityShare] = useState([])
-  const [seoMetricsFromDb, setSeoMetricsFromDb] = useState([])
+  const [seoMetricsFromDb, setSeoMetricsFromDb] = useState()
 
   useEffect(() => {
     let mounted = true;
 
     (async () => {
       try {
-        const aiReferenceData = await geo.getAiRefernceVisitors();
+        const aiReferenceData = await geo.getAiReferenceVisitors();
         const geoKpisData = await geo.getGeoKPIs()
         const rankingDistribtuionData = await geo.getRankingDistribution()
         const performanceTrendData = await geo.getPerformanceTrend()
@@ -56,7 +56,7 @@ export default function Geo() {
             <SingleCard tittle={"AI Citations"} value={seoMetricsFromDb?.aICitationReadiness} loading={loading} img={citation}/>
             <SingleCard tittle={"GEO Visibility Share"} value={`${pageVisibilityShare.page1Share} %`} loading={loading} img={share}/>
         </div>
-          <AreaChartCard titleValue="Performance Trend" titleLabel='GEO Performance daily' data={geoPerformanceTrend}/>
+          <AreaChartCard titleValue="Performance Trend" titleLabel='GEO Performance daily' data={geoPerformanceTrend} desc="Notice: it takes 1-3 days for correct data!"/>
       <div className="flex flex-col lg:flex-row gap-6 justify-around">
           <AiReferncedVisitorsCard data={aiReferenceData} loading={loading}/>
           <PieChart title='GEO Ranking Distribution' data={rankingDistribtuion} loading={loading}/>

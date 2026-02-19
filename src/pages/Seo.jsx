@@ -12,6 +12,7 @@ import score from '../assets/icons/score.png'
 import links from '../assets/icons/links.png'
 import AreaChartCard from '../components/AreaChartCard.jsx';
 import keywords from '../assets/icons/keywords.png'
+import LegendAreaChart from '../components/cards/LegendAreaChart.jsx';
 
 
 export default function Seo() {
@@ -24,6 +25,7 @@ export default function Seo() {
   const [rankingDistribtuion, setRankingDistribtuion] = useState()
   const [performanceTrend, setPerformanceTrend] = useState([])
   const [seoMetricsFromDb, setSeoMetricsFromDb] = useState([])
+  const [newVsLostBacklinks, setNewVsLostBacklinks] = useState()
 
     useEffect(() => {
       let mounted = true;
@@ -37,7 +39,7 @@ export default function Seo() {
           const rankingDistribtuionData = await seo.getRankingDistribution()
           const performanceTrendData = await seo.getPerformanceTrend()
           const seoMetricsFromDbData = await seo.getSeoMetricsFromDb(user.id)
-          
+          const newVsLostBacklinks = await seo.getNewVsLostBacklinks()
 
           if (mounted){
             settopKeywords(topKeywordsData)
@@ -46,6 +48,7 @@ export default function Seo() {
             setRankingDistribtuion(rankingDistribtuionData)
             setPerformanceTrend(performanceTrendData)
             setSeoMetricsFromDb(seoMetricsFromDbData)
+            setNewVsLostBacklinks(newVsLostBacklinks)
           } 
         } finally {
           if (mounted) setLoading(false);
@@ -61,17 +64,18 @@ export default function Seo() {
             <SingleCard tittle={"Organic Traffic"} value={seoMetricsFromDb?.organicTraffic} loading={loading} img={trafficIcon}/>
             <SingleCard tittle={"Visibility Index"} value={seoMetricsFromDb?.visibilityIndex} loading={loading} img={VisibilityIcon}/>
             <SingleCard tittle={"Switzerland Traffic"} value={chTrafficOrganic?.organicTraffic} loading={loading} img={switzerland}/>
-            <SingleCard tittle={"Site Authority Score"} value={chTrafficOrganic?.authorityScore} loading={loading} img={score}/>
+            <SingleCard tittle={"Authority Score"} value={chTrafficOrganic?.authorityScore} loading={loading} img={score}/>
             <SingleCard tittle={"Backlinks Tottal"} value={chTrafficOrganic?.totalBacklinks} loading={loading} img={links}/>
             <SingleCard tittle={"Organic Keywords"} value={chTrafficOrganic?.organicKeywords} loading={loading} img={keywords}/>
         </div>
-            <AreaChartCard titleValue="Performance Trend" titleLabel='SEO Performance daily' data={performanceTrend}/>
+            <AreaChartCard titleValue="Performance Trend" titleLabel='SEO Performance daily' data={performanceTrend} desc="Notice: it takes 1 day for correct data!"/>
         <div className="flex flex-col lg:flex-row gap-6 w-full justify-around">
             <PieChart title='Ranking Distribution' data={rankingDistribtuion}/>
             <TopKeywordsVolume data={topKeywords} tittle="Top Keywords"/>
         </div>
         <div className="flex flex-col lg:flex-row gap-6 w-full justify-around">
             <TopViewedPagesCard title="Top Visited Pages" data={topViewedPages} loading={loading}/>
+            <LegendAreaChart weeks={newVsLostBacklinks?.weeks} titleLabel='New vs Lost backlinks (weekly)'/>
         </div>
     </div>
   )

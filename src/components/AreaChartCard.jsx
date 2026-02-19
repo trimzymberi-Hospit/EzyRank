@@ -34,6 +34,7 @@ export default function AreaChartCard({
   titleLabel = "Users this month",
   data = [],
   metric = "clicks",
+  desc
 }) {
   const chartElRef = useRef(null);
   const chartRef = useRef(null);
@@ -66,7 +67,24 @@ export default function AreaChartCard({
         width: "100%",
         type: "area",
         fontFamily: "Inter, sans-serif",
-        toolbar: { show: false },
+        toolbar: { 
+          show: true, 
+          tools: {
+              download: true,
+              selection: false,
+              zoom: false,
+              zoomin: true,
+              zoomout: true,
+              pan: false,
+              reset: false,
+            },
+            export: {
+              csv: {
+                filename: "seo-performance-report"
+              }
+            }
+          
+      },
         dropShadow: { enabled: true },
       },
       tooltip: {
@@ -193,6 +211,7 @@ export default function AreaChartCard({
       <div className="grid grid-cols-1 items-center justify-between">
         <div className="pt-4 md:pt-6" />
       </div>
+      <p className="text-gray-400">{desc}</p>
     </div>
   );
 }

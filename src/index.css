@@ -41,3 +41,34 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.2) #0b1739;
 }
+
+.apexcharts-tooltip {
+  background: #0b1739 !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  color: #e5e7eb !important;
+}
+.apexcharts-tooltip-title {
+  background: #0e1c45 !important;
+  color: #fff !important;
+  border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+
+.apexcharts-menu {
+  background-color: #0b1739 !important;
+}
+
+.apexcharts-menu-item:hover {
+  background-color: #1a2a5e !important;  /* darker blue */
+  color: #ffffff !important;
+}
+
+/* Hide SVG option */
+.apexcharts-menu-item.exportSVG {
+  display: none !important;
+}
+
+/* Hide PNG option */
+.apexcharts-menu-item.exportPNG {
+  display: none !important;
+}
