@@ -28,7 +28,7 @@ export default function Dashboard() {
         setLoading(true);
         try {
           const countriesVisitorsData = await seo.getCountriesVisitors()
-          const aiReferenceData = await geo.getAiRefernceVisitors();
+          const aiReferenceData = await geo.getAiReferenceVisitors();
           const topViewedPagesData = await seo.getTopVisitedPages();
           const chTrafficOrganicData = await seo.getChTrafficOrganic()
           const seoMetricsFromDbData = await seo.getSeoMetricsFromDb(user.id)
