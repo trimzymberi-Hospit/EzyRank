@@ -38,7 +38,7 @@ export default function SingleCard({tittle, value, loading, img}) {
             <h4 className="text-sm">{tittle}</h4>
             <img src={img} alt={tittle + " icon"} className='w-7 h-7'/>
           </div>
-          <h1 className="text-4xl mt-2 font-bold">{value != undefined ? value : "No Data"}</h1>
+          <h1 className="text-3xl mt-2 font-bold">{value != undefined ? value : "Not Available"}</h1>
         </div>
       );
 }
