@@ -33,23 +33,47 @@ export default function Seo() {
       (async () => {
         setLoading(true);
         try {
-          const topKeywordsData = await seo.getTopKeywords()
-          const topViewedPagesData = await seo.getTopVisitedPages()
-          const chTrafficOrganicData = await seo.getChTrafficOrganic()
-          const rankingDistribtuionData = await seo.getRankingDistribution()
-          const performanceTrendData = await seo.getPerformanceTrend()
-          const seoMetricsFromDbData = await seo.getSeoMetricsFromDb(user.id)
-          const newVsLostBacklinks = await seo.getNewVsLostBacklinks()
+          const [
+            topKeywordsResult,
+            topViewedPagesResult,
+            chTrafficOrganicResult,
+            rankingDistribtuionResult,
+            performanceTrendResult,
+            seoMetricsFromDbResult,
+            newVsLostBacklinksResult,
+          ] = await Promise.allSettled([
+            seo.getTopKeywords(),
+            seo.getTopVisitedPages(),
+            seo.getChTrafficOrganic(),
+            seo.getRankingDistribution(),
+            seo.getPerformanceTrend(),
+            seo.getSeoMetricsFromDb(user.id),
+            seo.getNewVsLostBacklinks(),
+          ]);
 
-          if (mounted){
-            settopKeywords(topKeywordsData)
-            setTopViewedPages(topViewedPagesData)
-            setChTrafficOrganic(chTrafficOrganicData)
-            setRankingDistribtuion(rankingDistribtuionData)
-            setPerformanceTrend(performanceTrendData)
-            setSeoMetricsFromDb(seoMetricsFromDbData)
-            setNewVsLostBacklinks(newVsLostBacklinks)
-          } 
+          if (mounted) {
+            if (topKeywordsResult.status === "fulfilled") {
+              settopKeywords(topKeywordsResult.value);
+            }
+            if (topViewedPagesResult.status === "fulfilled") {
+              setTopViewedPages(topViewedPagesResult.value);
+            }
+            if (chTrafficOrganicResult.status === "fulfilled") {
+              setChTrafficOrganic(chTrafficOrganicResult.value);
+            }
+            if (rankingDistribtuionResult.status === "fulfilled") {
+              setRankingDistribtuion(rankingDistribtuionResult.value);
+            }
+            if (performanceTrendResult.status === "fulfilled") {
+              setPerformanceTrend(performanceTrendResult.value);
+            }
+            if (seoMetricsFromDbResult.status === "fulfilled") {
+              setSeoMetricsFromDb(seoMetricsFromDbResult.value);
+            }
+            if (newVsLostBacklinksResult.status === "fulfilled") {
+              setNewVsLostBacklinks(newVsLostBacklinksResult.value);
+            }
+          }
         } finally {
           if (mounted) setLoading(false);
         }

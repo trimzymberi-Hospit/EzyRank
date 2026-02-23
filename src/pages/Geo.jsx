@@ -26,20 +26,43 @@ export default function Geo() {
 
     (async () => {
       try {
-        const aiReferenceData = await geo.getAiReferenceVisitors();
-        const geoKpisData = await geo.getGeoKPIs()
-        const rankingDistribtuionData = await geo.getRankingDistribution()
-        const performanceTrendData = await geo.getPerformanceTrend()
-        const pageVisibilityShareData = await geo.getVisibilityShare()
-        const seoMetricsFromDbData = await seo.getSeoMetricsFromDb(user.id)
-        if (mounted){
-          setAiReferencedData(aiReferenceData);
-          setGeoKpis(geoKpisData)
-          setRankingDistribtuion(rankingDistribtuionData)
-          setGeoPerformanceTrend(performanceTrendData)
-          setpageVisibilityShare(pageVisibilityShareData)
-          setSeoMetricsFromDb(seoMetricsFromDbData)
-        } 
+        const [
+          aiReferenceResult,
+          geoKpisResult,
+          rankingDistribtuionResult,
+          performanceTrendResult,
+          pageVisibilityShareResult,
+          seoMetricsFromDbResult,
+        ] = await Promise.allSettled([
+          geo.getAiReferenceVisitors(),
+          geo.getGeoKPIs(),
+          geo.getRankingDistribution(),
+          geo.getPerformanceTrend(),
+          geo.getVisibilityShare(),
+          seo.getSeoMetricsFromDb(user.id),
+        ]);
+
+        if (mounted) {
+          console.log(aiReferenceResult.status)
+          if (aiReferenceResult.status === "fulfilled") {
+            setAiReferencedData(aiReferenceResult.value);
+          }
+          if (geoKpisResult.status === "fulfilled") {
+            setGeoKpis(geoKpisResult.value);
+          }
+          if (rankingDistribtuionResult.status === "fulfilled") {
+            setRankingDistribtuion(rankingDistribtuionResult.value);
+          }
+          if (performanceTrendResult.status === "fulfilled") {
+            setGeoPerformanceTrend(performanceTrendResult.value);
+          }
+          if (pageVisibilityShareResult.status === "fulfilled") {
+            setpageVisibilityShare(pageVisibilityShareResult.value);
+          }
+          if (seoMetricsFromDbResult.status === "fulfilled") {
+            setSeoMetricsFromDb(seoMetricsFromDbResult.value);
+          }
+        }
       } finally {
         if (mounted) setLoading(false);
       }

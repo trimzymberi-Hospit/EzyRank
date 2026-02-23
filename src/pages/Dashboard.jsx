@@ -27,18 +27,37 @@ export default function Dashboard() {
       (async () => {
         setLoading(true);
         try {
-          const countriesVisitorsData = await seo.getCountriesVisitors()
-          const aiReferenceData = await geo.getAiReferenceVisitors();
-          const topViewedPagesData = await seo.getTopVisitedPages();
-          const chTrafficOrganicData = await seo.getChTrafficOrganic()
-          const seoMetricsFromDbData = await seo.getSeoMetricsFromDb(user.id)
-          if (mounted){
-            setAiReferencedData(aiReferenceData);
-            setCountriesVisitors(countriesVisitorsData)
-            setTopViewedPages(topViewedPagesData)
-            setChTrafficOrganic(chTrafficOrganicData)
-            setSeoMetricsFromDb(seoMetricsFromDbData)
-          } 
+          const [
+            countriesVisitorsResult,
+            aiReferenceResult,
+            topViewedPagesResult,
+            chTrafficOrganicResult,
+            seoMetricsFromDbResult,
+          ] = await Promise.allSettled([
+            seo.getCountriesVisitors(),
+            geo.getAiReferenceVisitors(),
+            seo.getTopVisitedPages(),
+            seo.getChTrafficOrganic(),
+            seo.getSeoMetricsFromDb(user.id),
+          ]);
+
+          if (mounted) {
+            if (countriesVisitorsResult.status === "fulfilled") {
+              setCountriesVisitors(countriesVisitorsResult.value);
+            }
+            if (aiReferenceResult.status === "fulfilled") {
+              setAiReferencedData(aiReferenceResult.value);
+            }
+            if (topViewedPagesResult.status === "fulfilled") {
+              setTopViewedPages(topViewedPagesResult.value);
+            }
+            if (chTrafficOrganicResult.status === "fulfilled") {
+              setChTrafficOrganic(chTrafficOrganicResult.value);
+            }
+            if (seoMetricsFromDbResult.status === "fulfilled") {
+              setSeoMetricsFromDb(seoMetricsFromDbResult.value);
+            }
+          }
         } finally {
           if (mounted) setLoading(false);
         }
