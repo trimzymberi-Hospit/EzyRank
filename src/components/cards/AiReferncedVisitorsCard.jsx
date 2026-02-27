@@ -7,7 +7,7 @@ import grok from '../../assets/grok.webp'
 
 export default function AiReferncedVisitorsCard({data, loading}) {
   return (
-    <div className='flex md:min-w-1/2 min-w-full gap-6 rounded-2xl w-full p-6 flex-col bg-app-third text-text-secondary'>
+    <div className='flex md:w-1/2  gap-6 rounded-2xl w-full p-6 flex-col bg-app-third text-text-secondary'>
         <h1 className="mb-6 text-xl text-white">AI Referenced Visitors</h1>
             <div className='flex justify-between items-center'>
                 <div className='flex justify-center items-center gap-3'>

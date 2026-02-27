@@ -10,7 +10,7 @@ export default function TopViewedPagesCard({data, tittle, loading}) {
   }
 
   return (
-    <div className="flex min-w-full md:min-w-1/2 w-full flex-col gap-6 rounded-2xl bg-app-third p-6 text-text-secondary min-h-[510px] max-h-[510px] overflow-hidden">
+    <div className="flex  md:w-1/2 w-full flex-col gap-6 rounded-2xl bg-app-third p-6 text-text-secondary min-h-[510px] max-h-[510px] overflow-hidden">
       {/* Title */}
       <h1 className="text-2xl text-white text-center font-bold font-logo">
         Top Visited Pages

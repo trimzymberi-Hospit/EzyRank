@@ -43,7 +43,6 @@ export default function Geo() {
         ]);
 
         if (mounted) {
-          console.log(aiReferenceResult.status)
           if (aiReferenceResult.status === "fulfilled") {
             setAiReferencedData(aiReferenceResult.value);
           }

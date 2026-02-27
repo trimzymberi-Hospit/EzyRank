@@ -9,6 +9,7 @@ import Seo from "../pages/Seo.jsx";
 import Geo from "../pages/Geo.jsx";
 import RoleRedirect from "../routes/RoleRedirect.jsx";
 import AdminPage from "../pages/AdminPage.jsx";
+import Conversions from "../pages/Conversions.jsx";
 
 export function AppRoutes() {
   return (
@@ -23,6 +24,7 @@ export function AppRoutes() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/seo" element={<Seo />} />
           <Route path="/geo" element={<Geo />} />
+          <Route path="/conversions" element={<Conversions />} />
         </Route>
       </Route>
 

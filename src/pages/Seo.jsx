@@ -83,7 +83,7 @@ export default function Seo() {
     }, [seo]);
 
   return (
-    <div className="w-full flex flex-col gap-6 pr-4">
+    <div className="w-full flex flex-col gap-6">
          <div className="flex flex-col lg:flex-row  gap-6 justify-around text-text-secondary w-full">
             <SingleCard tittle={"Organic Traffic"} value={seoMetricsFromDb?.organicTraffic} loading={loading} img={trafficIcon}/>
             <SingleCard tittle={"Visibility Index"} value={seoMetricsFromDb?.visibilityIndex} loading={loading} img={VisibilityIcon}/>
@@ -100,6 +100,9 @@ export default function Seo() {
         <div className="flex flex-col lg:flex-row gap-6 w-full justify-around">
             <TopViewedPagesCard title="Top Visited Pages" data={topViewedPages} loading={loading}/>
             <LegendAreaChart weeks={newVsLostBacklinks?.weeks} titleLabel='New vs Lost backlinks (weekly)'/>
+        </div>
+        <div className="flex flex-col lg:flex-row gap-6 w-full justify-around">
+             
         </div>
     </div>
   )

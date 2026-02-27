@@ -114,7 +114,7 @@ export default function LegendAreaChart({
                 }
               }
             
-        },
+    },
         animations: { enabled: true },
       },
       legend: {
@@ -183,7 +183,7 @@ export default function LegendAreaChart({
   const isUp = prepared.change !== null ? prepared.change >= 0 : true;
 
   return (
-    <div className="w-full rounded-2xl bg-app-third min-h-[510px] max-h-[510px] rounded-base shadow-xs p-4 md:p-6">
+    <div className="w-full md:w-1/2 rounded-2xl bg-app-third min-h-[510px] max-h-[510px] rounded-base shadow-xs p-4 md:p-6">
       <div className="flex justify-between">
         <div>
           <h5 className="text-2xl font-bold text-heading">{titleLabel}</h5>

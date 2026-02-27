@@ -52,7 +52,7 @@ export default function PieChart({
   let currentAngle = 0;
 
   return (
-    <div className="w-full bg-app-third rounded-2xl shadow-xs p-4 md:p-6">
+    <div className="flex flex-col w-full md:w-1/2 bg-app-third rounded-2xl shadow-xs p-4 md:p-6">
       {/* Header */}
       <div className="flex justify-between items-start w-full">
         <div className="flex-col items-center">
