@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function ConversionTable({data, loading}) {
   return (
-    <div class="w-full mt-6 overflow-x-auto bg-app-third rounded-2xl ">
+    <div class="w-full mt-6 bg-app-third rounded-2xl max-h-[510px] overflow-y-auto overflow-x-auto scrollbar-dark">
         <table class="w-full text-sm text-left rtl:text-right text-body">
            
             <thead class="text-sm text-body bg-[#0e1e4b]  rounded-base">
@@ -29,7 +29,7 @@ export default function ConversionTable({data, loading}) {
             </thead>
             <tbody>
                     {data && data.length > 0 && data.map( (conversion) => (   
-                    <tr className='bg-neutral-primary '>
+                    <tr className='bg-neutral-primary overflow-y-auto '>
                         <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
                             {conversion?.dl_description}
                         </th>

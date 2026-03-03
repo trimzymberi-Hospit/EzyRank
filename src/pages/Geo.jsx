@@ -78,7 +78,7 @@ export default function Geo() {
             <SingleCard tittle={"AI Citations"} value={seoMetricsFromDb?.aICitationReadiness} loading={loading} img={citation}/>
             <SingleCard tittle={"GEO Visibility Share"} value={`${pageVisibilityShare.page1Share} %`} loading={loading} img={share}/>
         </div>
-          <AreaChartCard titleValue="Performance Trend" titleLabel='GEO Performance daily' data={geoPerformanceTrend} desc="Notice: it takes 1-3 days for correct data!"/>
+          <AreaChartCard metric='impressions' titleValue="Performance Trend" titleLabel='GEO Performance daily' data={geoPerformanceTrend} desc="Notice: it takes 1-3 days for correct data!"/>
       <div className="flex flex-col lg:flex-row gap-6 justify-around">
           <AiReferncedVisitorsCard data={aiReferenceData} loading={loading}/>
           <PieChart title='GEO Ranking Distribution' data={rankingDistribtuion} loading={loading}/>

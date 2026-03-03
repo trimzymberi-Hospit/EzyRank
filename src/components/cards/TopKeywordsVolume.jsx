@@ -33,7 +33,7 @@ export default function TopKeywordsVolume({data, loading, tittle}) {
         {data && data.length > 0 && data.map((c, idx) => (
           <div
             key={`${c.keyword}-${idx}`}
-            className="flex justify-between items-center"
+            className="flex justify-between items-center border-b"
           >
             <h4 className="text-lg text-white">{c?.keyword}</h4>
             <h4 className="text-lg text-white">{c?.position}</h4>

@@ -6,6 +6,8 @@ import contactFormIcon from '../assets/icons/contact form.png'
 import salesIcon from '../assets/icons/sales.png'
 import ConversionTable from '../components/ConversionTable';
 import { useServices } from '../api/useServices';
+import PieChart from '../components/PieChart';
+import AreaChartCard from '../components/AreaChartCard';
 
 export default function Conversions() {
 
@@ -14,6 +16,12 @@ export default function Conversions() {
   const [leadsConversions, setLeadsConversions] = useState([])
   const [purchaseConversions, setPurchaseConversions] = useState([])
 
+  const totalMailLeads = leadsConversions?.rows?.filter(lead => lead["dl_description"]?.includes("Mail"))?.reduce((acc, curr) => acc + parseFloat(curr["dl_value"]), 0)
+  const totalPhoneLeads = leadsConversions?.rows?.filter(lead => lead["dl_description"]?.includes("Phone"))?.reduce((acc, curr) => acc + parseFloat(curr["dl_value"]), 0)
+  const totalContactFormLeads = leadsConversions?.rows?.filter(lead => lead["dl_description"]?.includes("Contact"))?.reduce((acc, curr) => acc + parseFloat(curr["dl_value"]), 0)
+  const totalMapLeads = leadsConversions?.rows?.filter(lead => lead["dl_description"]?.includes("Map"))?.reduce((acc, curr) => acc + parseFloat(curr["dl_value"]), 0)
+  const totalPurchase = purchaseConversions?.rows?.reduce((acc, curr) => acc + parseFloat(curr?.dl_value),0)
+  
   useEffect(() => {
     let mounted = true;
 
@@ -44,28 +52,44 @@ export default function Conversions() {
   return (
     <div className="w-full flex flex-col gap-6">
         <div className="flex flex-col lg:flex-row  gap-6 justify-around text-text-secondary w-full">
-            <SingleCard tittle={"Phone Clicks"} value={0} loading={loading} img={phoneIcon}/>
-            <SingleCard tittle={"Mail Clicks"} value={0} loading={loading} img={mailIcon}/>
-            <SingleCard tittle={"Contact Form Submit"} value={0} loading={loading} img={contactFormIcon}/>
-            <SingleCard tittle={"Generated"} value={`${purchaseConversions?.reduce((acc, curr) => acc + parseFloat(curr?.dl_value),0)} CHF`} loading={loading} img={salesIcon}/>
+            <SingleCard tittle={"Phone Clicks"} value={totalPhoneLeads || 0} loading={loading} img={phoneIcon}/>
+            <SingleCard tittle={"Mail Clicks"} value={totalMailLeads} loading={loading} img={mailIcon}/>
+            <SingleCard tittle={"Maps Clicks"} value={totalMapLeads} loading={loading} img={mailIcon}/>
+            <SingleCard tittle={"Contact Form Submit"} value={totalContactFormLeads || 0} loading={loading} img={contactFormIcon}/>
+            <SingleCard tittle={"Generated"} value={`${totalPurchase} CHF`} loading={loading} img={salesIcon}/>
+        </div>
+        <div className="flex flex-col lg:flex-row gap-6 w-full justify-around">
+        {leadsConversions?.rows?.length > 0 && (
+          <>
+            <PieChart title='Traffic Distribution' data={[leadsConversions?.totalGoogleConversions, leadsConversions?.totalAiConversions]}/>
+            <AreaChartCard titleLabel='Leads Performance' metric='conversions' data={leadsConversions?.dailyPerformance}/>
+          </>
+        )}
+        {purchaseConversions?.rows?.length > 0 && (
+          <>
+            <PieChart title='Traffic Distribution' data={[purchaseConversions?.totalGoogleConversions, purchaseConversions?.totalAiConversions]}/>
+            <AreaChartCard titleLabel='Purchase Performance' metric='conversions' data={purchaseConversions?.dailyPerformance}/>
+          </>
+        )}
         </div>
         <div className="flex flex-col gap mt-5 justify-around">
-          {leadsConversions?.length > 0 && (
+          {leadsConversions?.rows?.length > 0 && (
             <>
               <h1 className="text-2xl text-white text-left font-bold font-logo">
-                Lead Conversions
+                All Lead Conversions
               </h1>
-              <ConversionTable data={leadsConversions} />
+              <ConversionTable data={leadsConversions?.rows} />
             </>
           )}
-          {purchaseConversions?.length > 0 && (
+          {purchaseConversions?.rows?.length > 0 && (
             <>
-              <h1 className='text-2xl text-white text-left font-bold font-logo mt-10'>Purchase Conversions</h1>
-              <ConversionTable data={purchaseConversions}/>
+              <h1 className="text-2xl text-white text-left font-bold font-logo">
+                All Purchase Conversions
+              </h1>
+              <ConversionTable data={purchaseConversions?.rows}/>
             </>
           )}
         </div>
-
     </div>
   )
 }
