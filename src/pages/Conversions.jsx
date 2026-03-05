@@ -4,6 +4,7 @@ import mailIcon from '../assets/icons/mail.png'
 import phoneIcon from '../assets/icons/phone.png'
 import contactFormIcon from '../assets/icons/contact form.png'
 import salesIcon from '../assets/icons/sales.png'
+import mapIcon from '../assets/icons/map.png'
 import ConversionTable from '../components/ConversionTable';
 import { useServices } from '../api/useServices';
 import PieChart from '../components/PieChart';
@@ -49,12 +50,13 @@ export default function Conversions() {
 
     return () => { mounted = false; };
   }, [conversions]);
+
   return (
     <div className="w-full flex flex-col gap-6">
         <div className="flex flex-col lg:flex-row  gap-6 justify-around text-text-secondary w-full">
             <SingleCard tittle={"Phone Clicks"} value={totalPhoneLeads || 0} loading={loading} img={phoneIcon}/>
             <SingleCard tittle={"Mail Clicks"} value={totalMailLeads} loading={loading} img={mailIcon}/>
-            <SingleCard tittle={"Maps Clicks"} value={totalMapLeads} loading={loading} img={mailIcon}/>
+            <SingleCard tittle={"Maps Clicks"} value={totalMapLeads} loading={loading} img={mapIcon}/>
             <SingleCard tittle={"Contact Form Submit"} value={totalContactFormLeads || 0} loading={loading} img={contactFormIcon}/>
             <SingleCard tittle={"Generated"} value={`${totalPurchase} CHF`} loading={loading} img={salesIcon}/>
         </div>
@@ -62,13 +64,13 @@ export default function Conversions() {
         {leadsConversions?.rows?.length > 0 && (
           <>
             <PieChart title='Traffic Distribution' data={[leadsConversions?.totalGoogleConversions, leadsConversions?.totalAiConversions]}/>
-            <AreaChartCard titleLabel='Leads Performance' metric='conversions' data={leadsConversions?.dailyPerformance}/>
+            <AreaChartCard titleLabel='Leads Performance' metric='conversions' data={[...leadsConversions?.dailyPerformance].reverse()}/>
           </>
         )}
         {purchaseConversions?.rows?.length > 0 && (
           <>
             <PieChart title='Traffic Distribution' data={[purchaseConversions?.totalGoogleConversions, purchaseConversions?.totalAiConversions]}/>
-            <AreaChartCard titleLabel='Purchase Performance' metric='conversions' data={purchaseConversions?.dailyPerformance}/>
+            <AreaChartCard titleLabel='Purchase Performance' metric='conversions' data={[...purchaseConversions?.dailyPerformance].reverse()}/>
           </>
         )}
         </div>

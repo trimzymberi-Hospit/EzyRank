@@ -92,7 +92,7 @@ export default function Seo() {
             <SingleCard tittle={"Backlinks Tottal"} value={chTrafficOrganic?.totalBacklinks} loading={loading} img={links}/>
             <SingleCard tittle={"Organic Keywords"} value={chTrafficOrganic?.organicKeywords} loading={loading} img={keywords}/>
         </div>
-            <AreaChartCard titleValue="Performance Trend" titleLabel='SEO Performance daily' data={performanceTrend} desc="Notice: it takes 1 day for correct data!"/>
+            <AreaChartCard metric='impressions' titleValue="Performance Trend" titleLabel='SEO Performance daily' data={[...performanceTrend].filter(c => c.impressions !== 0)} desc="Notice: it takes 1 day for correct data!"/>
         <div className="flex flex-col lg:flex-row gap-6 w-full justify-around">
             <PieChart title='Ranking Distribution' data={rankingDistribtuion}/>
             <TopKeywordsVolume data={topKeywords} tittle="Top Keywords"/>
