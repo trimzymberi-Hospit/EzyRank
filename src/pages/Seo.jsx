@@ -26,6 +26,7 @@ export default function Seo() {
   const [performanceTrend, setPerformanceTrend] = useState([])
   const [seoMetricsFromDb, setSeoMetricsFromDb] = useState([])
   const [newVsLostBacklinks, setNewVsLostBacklinks] = useState()
+  const [countriesVisitors, setCountriesVisitors] = useState(null);
 
     useEffect(() => {
       let mounted = true;
@@ -34,6 +35,7 @@ export default function Seo() {
         setLoading(true);
         try {
           const [
+            countriesVisitorsResult,
             topKeywordsResult,
             topViewedPagesResult,
             chTrafficOrganicResult,
@@ -42,6 +44,7 @@ export default function Seo() {
             seoMetricsFromDbResult,
             newVsLostBacklinksResult,
           ] = await Promise.allSettled([
+            seo.getCountriesVisitors(),
             seo.getTopKeywords(),
             seo.getTopVisitedPages(),
             seo.getChTrafficOrganic(),
@@ -52,6 +55,9 @@ export default function Seo() {
           ]);
 
           if (mounted) {
+            if (countriesVisitorsResult.status === "fulfilled") {
+              setCountriesVisitors(countriesVisitorsResult.value);
+            }
             if (topKeywordsResult.status === "fulfilled") {
               settopKeywords(topKeywordsResult.value);
             }
@@ -95,6 +101,7 @@ export default function Seo() {
             <AreaChartCard metric='impressions' titleValue="Performance Trend" titleLabel='SEO Performance daily' data={[...performanceTrend].filter(c => c.impressions !== 0)} desc="Notice: it takes 1 day for correct data!"/>
         <div className="flex flex-col lg:flex-row gap-6 w-full justify-around">
             <PieChart title='Ranking Distribution' data={rankingDistribtuion}/>
+            <PieChart title="Website Traffic By Country" data={countriesVisitors} />
             <TopKeywordsVolume data={topKeywords} tittle="Top Keywords"/>
         </div>
         <div className="flex flex-col lg:flex-row gap-6 w-full justify-around">

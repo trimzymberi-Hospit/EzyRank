@@ -94,7 +94,7 @@ export default function ScoreDonutCard({ title, value, loading}) {
   }, [loading, safeValue, color]);
 
   return (
-    <div className="max-w-sm w-full bg-app-third rounded-2xl shadow-xs p-4 md:p-6">
+    <div className="max-w-sm w-full h-[350px] bg-app-third rounded-2xl shadow-xs p-4 md:p-6">
       <div className="flex justify-between items-center mb-3">
         <h5 className="text-xl font-semibold text-heading">{title}</h5>
 
