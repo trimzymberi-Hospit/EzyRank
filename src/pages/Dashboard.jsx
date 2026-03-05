@@ -70,7 +70,7 @@ export default function Dashboard() {
         <div className="flex flex-col lg:flex-row  gap-6 justify-around text-text-secondary w-full">
             <SingleCard tittle={"Organic Traffic"} value={seoMetricsFromDb?.organicTraffic} loading={loading} img={trafficIcon}/>
             <SingleCard tittle={"AI Reference"} value={aiReferenceData && Object.values(aiReferenceData).reduce((sum, acc) => sum + acc)} loading={loading} img={robot}/>
-            <SingleCard tittle={"Lead Clicks"} value={topViewedPages.length > 0 && topViewedPages.find(c => c?.pagePath?.includes("contact") || c?.pagePath?.includes("kontakt"))?.views || 0} loading={loading} img={lead}/>
+            <SingleCard tittle={"Lead Visits"} value={topViewedPages.length > 0 && topViewedPages.find(c => c?.pagePath?.includes("contact") || c?.pagePath?.includes("kontakt"))?.views || 0} loading={loading} img={lead}/>
             <SingleCard tittle={"Visibility Index"} value={seoMetricsFromDb?.visibilityIndex} loading={loading} img={VisibilityIcon}/>
         </div>
         <div className="flex flex-col lg:flex-row gap-6 justify-around">

@@ -9,6 +9,7 @@ import { createGeoService } from "./geoService.js";
 import { createDashboardService } from "./dashboardService.js";
 import { createAdminService } from "./adminService.js"
 import { createConversionsService } from "./conversionsService.js";
+import { createWebPerformanceService } from "./webPerformanceService.js";
 
 
 export function useServices() {
@@ -34,7 +35,8 @@ export function useServices() {
       geo: createGeoService(api),
       dashboard: createDashboardService(api),
       admin: createAdminService(api),
-      conversions: createConversionsService(api)
+      conversions: createConversionsService(api),
+      webPerformance: createWebPerformanceService(api),
     };
   }, [api]);
 }
