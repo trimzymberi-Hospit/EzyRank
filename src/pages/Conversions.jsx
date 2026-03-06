@@ -67,6 +67,8 @@ export default function Conversions() {
             <AreaChartCard titleLabel='Leads Performance' metric='conversions' data={[...leadsConversions?.dailyPerformance].reverse()}/>
           </>
         )}
+        </div>
+        <div className="flex flex-col lg:flex-row gap-6 w-full justify-around">
         {purchaseConversions?.rows?.length > 0 && (
           <>
             <PieChart title='Traffic Distribution' data={[purchaseConversions?.totalGoogleConversions, purchaseConversions?.totalAiConversions]}/>
@@ -75,22 +77,23 @@ export default function Conversions() {
         )}
         </div>
         <div className="flex flex-col gap mt-5 justify-around">
-          {leadsConversions?.rows?.length > 0 && (
+        {purchaseConversions?.rows?.length > 0 && (
             <>
-              <h1 className="text-2xl text-white text-left font-bold font-logo">
-                All Lead Conversions
-              </h1>
-              <ConversionTable data={leadsConversions?.rows} />
-            </>
-          )}
-          {purchaseConversions?.rows?.length > 0 && (
-            <>
-              <h1 className="text-2xl text-white text-left font-bold font-logo">
+              <h1 className="text-2xl text-white text-left font-bold font-logo mt-6">
                 All Purchase Conversions
               </h1>
               <ConversionTable data={purchaseConversions?.rows}/>
             </>
           )}
+          {leadsConversions?.rows?.length > 0 && (
+            <>
+              <h1 className="text-2xl text-white text-left font-bold font-logo mt-6">
+                All Lead Conversions
+              </h1>
+              <ConversionTable data={leadsConversions?.rows} />
+            </>
+          )}
+          
         </div>
     </div>
   )
