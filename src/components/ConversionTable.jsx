@@ -37,7 +37,7 @@ export default function ConversionTable({data, loading}) {
                             { `${conversion?.date.slice(6, 8)}-${conversion?.date.slice(4, 6)}-${conversion?.date.slice(0, 4)}`}
                         </td>
                         <td class="px-6 py-4">
-                            {conversion?.dl_value} {conversion?.dl_currency}
+                            {conversion?.dl_value} CHF
                         </td>
                         <td class="px-6 py-4">
                             {conversion?.country}

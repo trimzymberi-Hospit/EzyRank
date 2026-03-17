@@ -10,10 +10,10 @@ import ScoreDonutCard from '../components/ScoreDonutCard'
 
 export default function WebPerformance() {
 
-    const platformTypes = {
-      desktop : 'Desktop',
-      mobile: 'Mobile'
-    }
+  const platformTypes = {
+    desktop : 'Desktop',
+    mobile: 'Mobile'
+  }
   const { webPerformance } = useServices();
   const [loading, setLoading] = useState(true);
   const [platform, setPlatform] = useState('Desktop')
@@ -84,7 +84,7 @@ export default function WebPerformance() {
             <SingleCard tittle={"TTI"} value={`${(tti / 1000).toString().slice(0,4)}s`} loading={loading} img={eye}/>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-6 w-full justify-around">
+        <div className="flex flex-wrap w-full gap-y-6 gap-x-4 justify-around">
             <ScoreDonutCard title='Performance' value={performance} loading={loading}/>
             <ScoreDonutCard title='Accessibility' value={accessibility} loading={loading}/>
             <ScoreDonutCard title='Best Practices' value={bestPractices} loading={loading}/>

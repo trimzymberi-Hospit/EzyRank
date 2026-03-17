@@ -25,7 +25,6 @@ export default function Seo() {
   const [rankingDistribtuion, setRankingDistribtuion] = useState()
   const [performanceTrend, setPerformanceTrend] = useState([])
   const [seoMetricsFromDb, setSeoMetricsFromDb] = useState([])
-  const [newVsLostBacklinks, setNewVsLostBacklinks] = useState()
   const [countriesVisitors, setCountriesVisitors] = useState(null);
 
     useEffect(() => {
@@ -42,7 +41,6 @@ export default function Seo() {
             rankingDistribtuionResult,
             performanceTrendResult,
             seoMetricsFromDbResult,
-            newVsLostBacklinksResult,
           ] = await Promise.allSettled([
             seo.getCountriesVisitors(),
             seo.getTopKeywords(),
@@ -51,7 +49,6 @@ export default function Seo() {
             seo.getRankingDistribution(),
             seo.getPerformanceTrend(),
             seo.getSeoMetricsFromDb(user.id),
-            seo.getNewVsLostBacklinks(),
           ]);
 
           if (mounted) {
@@ -76,9 +73,6 @@ export default function Seo() {
             if (seoMetricsFromDbResult.status === "fulfilled") {
               setSeoMetricsFromDb(seoMetricsFromDbResult.value);
             }
-            if (newVsLostBacklinksResult.status === "fulfilled") {
-              setNewVsLostBacklinks(newVsLostBacklinksResult.value);
-            }
           }
         } finally {
           if (mounted) setLoading(false);
@@ -98,7 +92,7 @@ export default function Seo() {
             <SingleCard tittle={"Backlinks Tottal"} value={chTrafficOrganic?.totalBacklinks} loading={loading} img={links}/>
             <SingleCard tittle={"Organic Keywords"} value={chTrafficOrganic?.organicKeywords} loading={loading} img={keywords}/>
         </div>
-            <AreaChartCard metric='impressions' titleValue="Performance Trend" titleLabel='SEO Performance daily' data={[...performanceTrend].filter(c => c.impressions !== 0)} desc="Notice: it takes 1 day for correct data!"/>
+            <AreaChartCard metric='impressions' titleValue="Performance Trend" titleLabel='Impressions Performance daily' data={[...performanceTrend].filter(c => c.impressions !== 0)} desc="Notice: it takes 1 day for correct data!"/>
         <div className="flex flex-col lg:flex-row gap-6 w-full justify-around">
             <PieChart title='Ranking Distribution' data={rankingDistribtuion}/>
             <PieChart title="Website Traffic By Country" data={countriesVisitors} />
@@ -106,7 +100,7 @@ export default function Seo() {
         </div>
         <div className="flex flex-col lg:flex-row gap-6 w-full justify-around">
             <TopViewedPagesCard title="Top Visited Pages" data={topViewedPages} loading={loading}/>
-            <LegendAreaChart weeks={newVsLostBacklinks?.weeks} titleLabel='New vs Lost backlinks (weekly)'/>
+            <LegendAreaChart weeks={seoMetricsFromDb?.backLinksLast6Months?.weeks} titleLabel='New vs Lost backlinks (weekly)'/>
         </div>
         <div className="flex flex-col lg:flex-row gap-6 w-full justify-around">
              
