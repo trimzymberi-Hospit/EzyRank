@@ -171,37 +171,7 @@ export default function AreaChartCard({
         </div>
 
         {/* Change badge (kept from template). If no previous point, it won’t show */}
-        {changeText ? (
-          <div
-            className={`flex items-center font-medium text-center ${
-              isUp ? "text-fg-success text-green-600" : "text-fg-danger text-red-500"
-            }`}
-            title={
-              prepared.prev !== null
-                ? `Prev: ${prepared.prev} → Now: ${prepared.latest}`
-                : ""
-            }
-          >
-            <svg
-              className="w-5 h-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d={isUp ? "M12 6v13m0-13 4 4m-4-4-4 4" : "M12 19V6m0 13 4-4m-4 4-4-4"}
-              />
-            </svg>
-            {changeText}
-          </div>
-        ) : null}
+        
       </div>
 
       {/* Chart mounts here */}

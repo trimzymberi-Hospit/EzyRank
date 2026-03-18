@@ -85,12 +85,12 @@ export default function Seo() {
   return (
     <div className="w-full flex flex-col gap-6">
          <div className="flex flex-col lg:flex-row  gap-6 justify-around text-text-secondary w-full">
-            <SingleCard tittle={"Organic Traffic"} value={seoMetricsFromDb?.organicTraffic} loading={loading} img={trafficIcon}/>
+            <SingleCard tittle={"Organic Traffic"} value={new Intl.NumberFormat('de-CH').format(seoMetricsFromDb?.organicTraffic)} loading={loading} img={trafficIcon}/>
             <SingleCard tittle={"Visibility Index"} value={seoMetricsFromDb?.visibilityIndex} loading={loading} img={VisibilityIcon}/>
-            <SingleCard tittle={"Switzerland Traffic"} value={chTrafficOrganic?.organicTraffic} loading={loading} img={switzerland}/>
+            <SingleCard tittle={"Switzerland Traffic"} value={new Intl.NumberFormat('de-CH').format(chTrafficOrganic?.organicTraffic)} loading={loading} img={switzerland}/>
             <SingleCard tittle={"Authority Score"} value={chTrafficOrganic?.authorityScore} loading={loading} img={score}/>
-            <SingleCard tittle={"Backlinks Tottal"} value={chTrafficOrganic?.totalBacklinks} loading={loading} img={links}/>
-            <SingleCard tittle={"Organic Keywords"} value={chTrafficOrganic?.organicKeywords} loading={loading} img={keywords}/>
+            <SingleCard tittle={"Backlinks Tottal"} value={new Intl.NumberFormat('de-CH').format(chTrafficOrganic?.totalBacklinks)} loading={loading} img={links}/>
+            <SingleCard tittle={"Organic Keywords"} value={new Intl.NumberFormat('de-CH').format(chTrafficOrganic?.organicKeywords)} loading={loading} img={keywords}/>
         </div>
             <AreaChartCard metric='impressions' titleValue="Performance Trend" titleLabel='Impressions Performance daily' data={[...performanceTrend].filter(c => c.impressions !== 0)} desc="Notice: it takes 1 day for correct data!"/>
         <div className="flex flex-col lg:flex-row gap-6 w-full justify-around">

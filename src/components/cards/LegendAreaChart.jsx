@@ -188,42 +188,6 @@ export default function LegendAreaChart({
         <div>
           <h5 className="text-2xl font-bold text-heading">{titleLabel}</h5>
         </div>
-
-        {changeText ? (
-          <div
-            className={`flex items-center px-2.5 py-0.5 font-medium text-center ${
-              isUp ? "text-fg-success text-green-600" : "text-fg-danger text-red-500"
-            }`}
-            title={
-              prepared.prevTotal !== null
-                ? `Prev: ${prepared.prevTotal} → Now: ${prepared.lastTotal}`
-                : ""
-            }
-          >
-            <svg
-              className="w-5 h-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d={
-                  isUp
-                    ? "M12 6v13m0-13 4 4m-4-4-4 4"
-                    : "M12 19V6m0 13 4-4m-4 4-4-4"
-                }
-              />
-            </svg>
-            {changeText}
-          </div>
-        ) : null}
       </div>
 
       {/* Chart mount */}

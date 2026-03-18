@@ -21,7 +21,7 @@ export default function Conversions() {
   const totalPhoneLeads = leadsConversions?.rows?.filter(lead => lead["dl_description"]?.includes("Phone"))?.reduce((acc, curr) => acc + parseFloat(curr["dl_value"]), 0)
   const totalContactFormLeads = leadsConversions?.rows?.filter(lead => lead["dl_description"]?.includes("Contact"))?.reduce((acc, curr) => acc + parseFloat(curr["dl_value"]), 0)
   const totalMapLeads = leadsConversions?.rows?.filter(lead => lead["dl_description"]?.includes("Map"))?.reduce((acc, curr) => acc + parseFloat(curr["dl_value"]), 0)
-  const totalPurchase = purchaseConversions?.rows?.reduce((acc, curr) => acc + parseFloat(curr?.dl_value),0)
+  const totalPurchase = purchaseConversions?.rows?.reduce((acc, curr) => acc + parseFloat(curr?.dl_value),0)?.toString().slice(0,7)
   
   useEffect(() => {
     let mounted = true;
@@ -54,11 +54,11 @@ export default function Conversions() {
   return (
     <div className="w-full flex flex-col gap-6">
         <div className="flex flex-col lg:flex-row  gap-6 justify-around text-text-secondary w-full">
-            <SingleCard tittle={"Phone Clicks"} value={`${totalPhoneLeads} CHF`} loading={loading} img={phoneIcon}/>
-            <SingleCard tittle={"Mail Clicks"} value={`${totalMailLeads} CHF`} loading={loading} img={mailIcon}/>
-            <SingleCard tittle={"Maps Clicks"} value={`${totalMapLeads} CHF`} loading={loading} img={mapIcon}/>
-            <SingleCard tittle={"Contact Form Submit"} value={`${totalContactFormLeads} CHF`} loading={loading} img={contactFormIcon}/>
-            <SingleCard tittle={"Generated"} value={`${totalPurchase?.toString().slice(0,7)} CHF`} loading={loading} img={salesIcon}/>
+            <SingleCard tittle={"Phone Clicks"} value={`${new Intl.NumberFormat('de-CH').format(totalPhoneLeads)} CHF`} loading={loading} img={phoneIcon}/>
+            <SingleCard tittle={"Mail Clicks"} value={`${new Intl.NumberFormat('de-CH').format(totalMailLeads)} CHF`} loading={loading} img={mailIcon}/>
+            <SingleCard tittle={"Maps Clicks"} value={`${new Intl.NumberFormat('de-CH').format(totalMapLeads)} CHF`} loading={loading} img={mapIcon}/>
+            <SingleCard tittle={"Contact Form Submit"} value={`${new Intl.NumberFormat('de-CH').format(totalContactFormLeads)} CHF`} loading={loading} img={contactFormIcon}/>
+            <SingleCard tittle={"Generated"} value={`${new Intl.NumberFormat('de-CH').format(totalPurchase)} CHF`} loading={loading} img={salesIcon}/>
         </div>
         <div className="flex flex-col lg:flex-row gap-6 w-full justify-around">
         {leadsConversions?.rows?.length > 0 && (
