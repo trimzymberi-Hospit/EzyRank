@@ -54,25 +54,25 @@ export default function Conversions() {
   return (
     <div className="w-full flex flex-col gap-6">
         <div className="flex flex-col lg:flex-row  gap-6 justify-around text-text-secondary w-full">
-            <SingleCard tittle={"Phone Clicks"} value={`${new Intl.NumberFormat('de-CH').format(totalPhoneLeads)} CHF`} loading={loading} img={phoneIcon}/>
-            <SingleCard tittle={"Mail Clicks"} value={`${new Intl.NumberFormat('de-CH').format(totalMailLeads)} CHF`} loading={loading} img={mailIcon}/>
-            <SingleCard tittle={"Maps Clicks"} value={`${new Intl.NumberFormat('de-CH').format(totalMapLeads)} CHF`} loading={loading} img={mapIcon}/>
-            <SingleCard tittle={"Contact Form Submit"} value={`${new Intl.NumberFormat('de-CH').format(totalContactFormLeads)} CHF`} loading={loading} img={contactFormIcon}/>
-            <SingleCard tittle={"Generated"} value={`${new Intl.NumberFormat('de-CH').format(totalPurchase)} CHF`} loading={loading} img={salesIcon}/>
+            <SingleCard tittle={"Phone Clicks"} value={`${new Intl.NumberFormat('de-CH').format(totalPhoneLeads)} CHF`} loading={loading} img={phoneIcon} description={'Total Value of Phone Clicks'}/>
+            <SingleCard tittle={"Mail Clicks"} value={`${new Intl.NumberFormat('de-CH').format(totalMailLeads)} CHF`} loading={loading} img={mailIcon} description={'Total Value of Mail Clicks'}/>
+            <SingleCard tittle={"Maps Clicks"} value={`${new Intl.NumberFormat('de-CH').format(totalMapLeads)} CHF`} loading={loading} img={mapIcon} description={'Total Value of Map Clicks'}/>
+            <SingleCard tittle={"Contact Form Submit"} value={`${new Intl.NumberFormat('de-CH').format(totalContactFormLeads)} CHF`} loading={loading} img={contactFormIcon} description={'Total Value of Contact Form Submit'}/>
+            <SingleCard tittle={"Generated"} value={`${new Intl.NumberFormat('de-CH').format(totalPurchase)} CHF`} loading={loading} img={salesIcon} description={'Total Value of purchase from your website'}/>
         </div>
         <div className="flex flex-col lg:flex-row gap-6 w-full justify-around">
         {leadsConversions?.rows?.length > 0 && (
           <>
-            <PieChart title='Traffic Distribution' data={[leadsConversions?.totalGoogleConversions, leadsConversions?.totalAiConversions]}/>
-            <AreaChartCard titleLabel='Leads Performance' metric='conversions' data={[...leadsConversions?.dailyPerformance].reverse()}/>
+            <PieChart title='Traffic Distribution' data={[leadsConversions?.totalGoogleConversions, leadsConversions?.totalAiConversions]} description={'The percentage of Traffic Distribution betwen Organic Traffic and AI'}/>
+            <AreaChartCard titleLabel='Leads Performance' metric='conversions' data={[...leadsConversions?.dailyPerformance].reverse()} description={'The number of times lead generated between your selected days'}/>
           </>
         )}
         </div>
         <div className="flex flex-col lg:flex-row gap-6 w-full justify-around">
         {purchaseConversions?.rows?.length > 0 && (
           <>
-            <PieChart title='Traffic Distribution' data={[purchaseConversions?.totalGoogleConversions, purchaseConversions?.totalAiConversions]}/>
-            <AreaChartCard titleLabel='Purchase Performance' metric='conversions' data={[...purchaseConversions?.dailyPerformance].reverse()}/>
+            <PieChart title='Traffic Distribution' data={[purchaseConversions?.totalGoogleConversions, purchaseConversions?.totalAiConversions]} description={'The percentage of Traffic Distribution betwen Organic Traffic and AI'}/>
+            <AreaChartCard titleLabel='Purchase Performance' metric='conversions' data={[...purchaseConversions?.dailyPerformance].reverse()} description={'The number of times purchase generated between your selected days'}/>
           </>
         )}
         </div>

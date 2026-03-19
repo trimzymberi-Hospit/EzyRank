@@ -77,18 +77,18 @@ export default function WebPerformance() {
         </div>
 
         <div className="flex flex-col lg:flex-row  gap-6 justify-around text-text-secondary w-full">
-            <SingleCard tittle={"LCP"} value={`${(lcp / 1000).toString().slice(0,4)}s`} loading={loading} img={time}/>
-            <SingleCard tittle={"FCP"} value={`${(fcp / 1000).toString().slice(0,4)}s`} loading={loading} img={speed}/>
-            <SingleCard tittle={"CLS"} value={`${(cls / 1000).toString().slice(0,5)}`} loading={loading} img={switch1}/>
-            <SingleCard tittle={"TBT"} value={`${(tbt / 1000).toString().slice(0,4)}s`} loading={loading} img={timer}/>
-            <SingleCard tittle={"TTI"} value={`${(tti / 1000).toString().slice(0,4)}s`} loading={loading} img={eye}/>
+            <SingleCard tittle={"LCP"} value={`${(lcp / 1000).toString().slice(0,4)}s`} loading={loading} img={time} description={`LCP (Largest Contentful Paint). Measures how quickly the main content of a page loads. Lower time means faster loading.`}/>
+            <SingleCard tittle={"FCP"} value={`${(fcp / 1000).toString().slice(0,4)}s`} loading={loading} img={speed} description={`FCP (First Contentful Paint). Measures how quickly the first visible content appears on the screen.`}/>
+            <SingleCard tittle={"CLS"} value={`${(cls / 1000).toString().slice(0,5)}`} loading={loading} img={switch1} description={`CLS (Cumulative Layout Shift). Measures how much the page layout shifts while loading. Lower values mean better visual stability.`}/>
+            <SingleCard tittle={"TBT"} value={`${(tbt / 1000).toString().slice(0,4)}s`} loading={loading} img={timer} description={`TBT (Total Blocking Time). Measures how long the page is blocked from user interaction during loading. Lower is better.`}/>
+            <SingleCard tittle={"TTI"} value={`${(tti / 1000).toString().slice(0,4)}s`} loading={loading} img={eye} description={`TTI (Time to Interactive). Measures how long it takes for the page to become fully interactive.`}/>
         </div>
 
         <div className="flex flex-wrap w-full gap-y-6 gap-x-4 justify-around">
-            <ScoreDonutCard title='Performance' value={performance} loading={loading}/>
-            <ScoreDonutCard title='Accessibility' value={accessibility} loading={loading}/>
-            <ScoreDonutCard title='Best Practices' value={bestPractices} loading={loading}/>
-            <ScoreDonutCard title='SEO' value={seo} loading={loading}/>
+            <ScoreDonutCard title='Performance' value={performance} loading={loading} description={'Overall score of your page speed and loading performance'}/>
+            <ScoreDonutCard title='Accessibility' value={accessibility} loading={loading} description={'Measures how accessible your website is for users, including those with disabilities'}/>
+            <ScoreDonutCard title='Best Practices' value={bestPractices} loading={loading} description={'Evaluates whether your site follows modern web development standards and security practices'}/>
+            <ScoreDonutCard title='SEO' value={seo} loading={loading} description={'Measures how well your page is optimized for search engines'}/>
         </div>
 
     </div>

@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-export default function TopKeywordsVolume({data, loading, tittle}) {
+export default function TopKeywordsVolume({data, loading, tittle, description}) {
 
   // if(!data || data.length === 0){
   //   return (
@@ -10,6 +10,8 @@ export default function TopKeywordsVolume({data, loading, tittle}) {
   //     </div>
   //   )
   // }
+  const [isOpen, setIsOpen] = useState(false)
+
 
   if(loading){
     <div role="status" class="absolute -translate-x-1/2 -translate-y-1/2 top-2/4 left-1/2">
@@ -19,10 +21,56 @@ export default function TopKeywordsVolume({data, loading, tittle}) {
   }
 
   return (
-    <div className="flex md:w-1/2 w-full flex-col gap-6 rounded-2xl bg-app-third p-6 text-text-secondary min-h-[510px] max-h-[510px] overflow-hidden">
+    <div className="flex md:w-1/2 w-full flex-col gap-6 rounded-2xl bg-app-third p-6 text-text-secondary min-h-[510px] max-h-[510px] ">
       {/* Header */}  
       {/* Table header */}
-      <h1 className="text-2xl text-white text-center font-bold font-logo">Top Keywords Position</h1>
+      <div className='w-full flex justify-between'>
+        <h1 className="text-2xl text-white text-center font-bold font-logo">Top Keywords Position</h1>
+        <div className="relative flex justify-end items-end">
+              <svg
+                onMouseEnter={() => setIsOpen(true)}
+                onMouseLeave={() => setIsOpen(false)}
+                viewBox="0 0 24 24"
+                height={20}
+                width={20}
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="cursor-pointer"
+              >
+                <g strokeWidth="0"></g>
+                <g strokeLinecap="round" strokeLinejoin="round"></g>
+                <g>
+                  <path
+                    d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                    stroke="#ffffff"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M9 9C9 5.49997 14.5 5.5 14.5 9C14.5 11.5 12 10.9999 12 13.9999"
+                    stroke="#ffffff"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M12 18.01L12.01 17.9989"
+                    stroke="#ffffff"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </g>
+              </svg>
+      
+              {isOpen && (
+                <p className="absolute text-gray-300 bottom-7 right-0 w-60 bg-blue-900 text-xs p-3 rounded-xl shadow-lg z-20">
+                  {description}
+                </p>
+              )}
+            </div>
+      </div>
       <div className="flex justify-between mb-1">
         <h4 className="text-xl text-white">Keyword</h4>
         <h4 className="text-xl text-white">Position</h4>
