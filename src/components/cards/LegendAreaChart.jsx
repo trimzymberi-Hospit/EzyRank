@@ -34,7 +34,8 @@ export default function LegendAreaChart({
   titleValue,
   titleLabel = "New vs Lost (weekly)",
   weeks = [],
-  description
+  description,
+  total
 }) {
   const chartElRef = useRef(null);
   const chartRef = useRef(null);
@@ -190,6 +191,7 @@ export default function LegendAreaChart({
       <div className="flex justify-between items-center">
         <div>
           <h5 className="text-2xl font-bold text-heading">{titleLabel}</h5>
+          <h5 className="text-lg font-bold text-heading">Total Backlinks: {total}</h5>
         </div>
         <div className="relative flex justify-end items-end">
               <svg
