@@ -43,7 +43,7 @@ export default function ConversionTable({data, loading}) {
                             {conversion?.country}
                         </td>   
                         <td class="px-6 py-4">
-                            {conversion?.sessionSource}
+                            {conversion?.sessionSource || conversion?.dl_originsource}
                         </td>
                         <td class="px-6 py-4">
                             {conversion?.deviceCategory}
