@@ -46,7 +46,8 @@ export default function AdminPage() {
       await admin.updateMetrics(client.id, {
         organicTraffic: client.organicTraffic,
         visibilityIndex:client.visibilityIndex,
-        aICitationReadiness: client.aICitationReadiness
+        aICitationReadiness: client.aICitationReadiness,
+        organicKeywords: client.organicKeywords
       });
 
       setAllClients((prev) =>
@@ -71,11 +72,12 @@ export default function AdminPage() {
         ) : (
           <div className="rounded-2xl bg-app-third border border-white/10 overflow-hidden">
             {/* Header */}
-            <div className="grid grid-cols-5 px-6 py-4 bg-white/5 text-sm font-semibold">
+            <div className="grid grid-cols-6 px-6 py-4 bg-white/5 text-sm font-semibold">
               <div>Client Name</div>
               <div>Organic Traffic</div>
               <div>Visibility Index</div>
               <div>Ai Citations</div>
+              <div>Organic Keywords</div>
               <div className="text-right">Action</div>
             </div>
 
@@ -83,7 +85,7 @@ export default function AdminPage() {
             {allClients.map((client) => (
               <div
                 key={client.id}
-                className="grid grid-cols-5 items-center px-6 py-4 border-t border-white/5 hover:bg-white/5 transition"
+                className="grid grid-cols-6 items-center px-6 py-6 border-t border-white/5 hover:bg-white/5 transition"
               >
                 {/* Name */}
                 <div>{client.name}</div>
@@ -118,6 +120,17 @@ export default function AdminPage() {
                     value={client.aICitationReadiness ?? ""}
                     onChange={(e) =>
                       handleChange(client.id, "aICitationReadiness", e.target.value)
+                    }
+                    className="bg-app px-3 py-1 rounded-lg border border-white/10 focus:outline-none focus:border-brand w-40"
+                  />
+                </div>
+
+                <div>
+                  <input
+                    type="number"
+                    value={client.organicKeywords ?? ""}
+                    onChange={(e) =>
+                      handleChange(client.id, "organicKeywords", e.target.value)
                     }
                     className="bg-app px-3 py-1 rounded-lg border border-white/10 focus:outline-none focus:border-brand w-40"
                   />
