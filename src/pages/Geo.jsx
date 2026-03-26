@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Navigate, useLocation } from "react-router-dom";
 import { useServices } from '../api/useServices';
 import { useAuth } from '../auth/AuthContext';
 import AiReferncedVisitorsCard from '../components/cards/AiReferncedVisitorsCard';
@@ -13,6 +14,8 @@ import AreaChartCard from '../components/AreaChartCard';
 export default function Geo() {
   const {user} = useAuth()
   const { seo, geo } = useServices();
+  const location = useLocation();
+  const geoEnabled = user?.geoService !== false;
   const [loading, setLoading] = useState(true);
   const [aiReferenceData, setAiReferencedData] = useState(null);
   const [geoKpis, setGeoKpis] = useState(null)
@@ -25,6 +28,11 @@ export default function Geo() {
     let mounted = true;
 
     (async () => {
+      if (!geoEnabled) {
+        if (mounted) setLoading(false);
+        return;
+      }
+
       try {
         const [
           aiReferenceResult,
@@ -68,7 +76,13 @@ export default function Geo() {
     })();
     
     return () => { mounted = false; };
-  }, [seo, geo]);
+  }, [seo, geo, user?.id, geoEnabled]);
+
+  if (!geoEnabled) {
+    // When embedded in the dashboard, don't redirect to itself.
+    if (location.pathname === "/dashboard") return null;
+    return <Navigate to="/dashboard" replace />;
+  }
 
   return (
     <div className="w-full flex flex-col gap-6">
