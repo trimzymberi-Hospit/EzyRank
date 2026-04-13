@@ -4,6 +4,7 @@ import perplexity from '../../assets/perplexity.png'
 import gemini from '../../assets/gemini.webp'
 import copilot from '../../assets/copilot.webp'
 import grok from '../../assets/grok.webp'
+import claude from '../../assets/claude.png'
 
 export default function AiReferncedVisitorsCard({data, loading, description}) {
 
@@ -84,7 +85,7 @@ export default function AiReferncedVisitorsCard({data, loading, description}) {
 
             <div className='flex justify-between items-center'>
                 <div className='flex justify-center items-center gap-3'>
-                    <img src={copilot} className="w-8 h-8" alt="chatgpt logo" />
+                    <img src={copilot} className="w-8 h-8" alt="copilot logo" />
                     <h4 className="text-lg text-white">Copilot</h4>
                 </div>
                 <h4 className="text-lg text-white">{data?.copilot || 0}</h4>
@@ -92,10 +93,18 @@ export default function AiReferncedVisitorsCard({data, loading, description}) {
 
             <div className='flex justify-between items-center'>
                 <div className='flex justify-center items-center gap-3'>
-                    <img src={grok} className="w-8 h-8" alt="chatgpt logo" />
+                    <img src={grok} className="w-8 h-8" alt="grok logo" />
                     <h4 className="text-lg text-white">Grok</h4>
                 </div>
                 <h4 className="text-lg text-white">{data?.grok || 0}</h4>
+            </div>
+
+            <div className='flex justify-between items-center'>
+                <div className='flex justify-center items-center gap-3'>
+                    <img src={claude} className="w-8 h-8" alt="claude logo" />
+                    <h4 className="text-lg text-white">Claude</h4>
+                </div>
+                <h4 className="text-lg text-white">{data?.claude || 0}</h4>
             </div>
     </div>
   )
