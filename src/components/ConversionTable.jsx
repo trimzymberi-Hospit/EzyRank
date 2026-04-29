@@ -22,7 +22,7 @@ export default function ConversionTable({ data, loading }) {
               data.map((conversion, index) => (
                 <tr key={index} className="bg-neutral-primary">
                   <th className="px-6 py-4 font-medium text-heading whitespace-nowrap">
-                    {conversion?.dl_description}
+                    {conversion?.dl_description.startsWith(" -") ? conversion?.dl_description.replace("-", "").trim() : conversion?.dl_description}
                   </th>
                   <td className="px-6 py-4">
                     {`${conversion?.date.slice(6, 8)}-${conversion?.date.slice(4, 6)}-${conversion?.date.slice(0, 4)}`}
